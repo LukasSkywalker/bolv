@@ -228,15 +228,14 @@ end
 
 CSV.open("nm.csv", "wb") do |csv|
   Category.all.each do |cat|
-    header = ["Rang", "Name", "Wohnort", "Verein", "Punkte"] + Competition.all.map { |comp| comp.name }
-    csv << ["Kategorie: #{cat.name}"] + [] * (header.count - 1)
-    csv << header
+    csv << ["Kategorie: #{cat.name}"]
+    csv << ["Rang", "Name", "Wohnort", "Verein", "Punkte"] + Competition.all.map { |comp| comp.name }
     cat.athletes.each do |ath|
       res = Competition.all.map do |comp|
         comp.points_for(ath)
       end
       csv << [0, ath.name, ath.location, ath.club, ath.points] + res
     end
-    csv << [] * 8
+    csv << []
   end
 end
