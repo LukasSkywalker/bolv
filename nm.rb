@@ -147,9 +147,11 @@ end
 class Athlete
   attr_accessor :name, :category, :location, :club
 
-  def initialize(category, name)
+  def initialize(category, name, location, club)
     @category = category
     @name = name
+    @location = location
+    @club = club
     @@all ||= []
     @@all << self
   end
@@ -158,13 +160,13 @@ class Athlete
     @@all
   end
 
-  def self.first_or_create(category, name)
+  def self.first_or_create(category, name, location, club)
     @@all ||= []
     a = @@all.select do |athlete|
       athlete.category == category && athlete.name == name
     end.first
     if a.nil?
-      a = Athlete.new(category, name)
+      a = Athlete.new(category, name, location, club)
     end
     a
   end
@@ -215,7 +217,7 @@ FILES.each do |file|
     if(comp_nom == 1)
       ath = Athlete.first(cat, col['Name'])
     else
-      ath = Athlete.first_or_create(cat, col['Name'])
+      ath = Athlete.first_or_create(cat, col['Name'], col['Ort'], col['Club'])
     end
     next if ath.nil?
     rank = col['Rang'].to_i
@@ -226,13 +228,14 @@ end
 
 CSV.open("nm.csv", "wb") do |csv|
   Category.all.each do |cat|
-    csv << ["Kategorie: #{cat.name}", " ", " ", " ", " ", " ", " "]
-    csv << ["Name", "Punkte"] + Competition.all.map { |comp| comp.name }
+    header = ["Rang", "Name", "Wohnort", "Verein", "Punkte"] + Competition.all.map { |comp| comp.name }
+    csv << ["Kategorie: #{cat.name}"] + [] * (header.count - 1)
+    csv << header
     cat.athletes.each do |ath|
       res = Competition.all.map do |comp|
         comp.points_for(ath)
       end
-      csv << [ath.name, ath.points] + res
+      csv << [0, ath.name, ath.location, ath.club, ath.points] + res
     end
     csv << [] * 8
   end
