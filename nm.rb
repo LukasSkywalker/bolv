@@ -230,11 +230,21 @@ CSV.open("nm.csv", "wb") do |csv|
   Category.all.each do |cat|
     csv << ["Kategorie: #{cat.name}"]
     csv << ["Rang", "Name", "Wohnort", "Verein", "Punkte"] + Competition.all.map { |comp| comp.name }
+    rang = 0
+    last_points = 9999
+    offset = 1
     cat.athletes.each do |ath|
+      if ath.points < last_points
+        rang += offset
+        offset = 1
+      else
+        offset += 1
+      end
+      last_points = ath.points
       res = Competition.all.map do |comp|
         comp.points_for(ath)
       end
-      csv << [0, ath.name, ath.location, ath.club, ath.points] + res
+      csv << [rang, ath.name, ath.location, ath.club, ath.points] + res
     end
     csv << []
   end
