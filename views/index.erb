@@ -2,7 +2,9 @@
   <% for i in 1..5 do %>
     <p>
       <input type="file" name="file<%= i %>"/>
-      <input type="checkbox" name="nom<%= i %>"/> NOM
+      <p><input type="checkbox" name="nom<%= i %>"/> NOM</p>
+      <p><input type="radio" name="sem<%= i %>" value="0"/> Frühling</p>
+      <p><input type="radio" name="sem<%= i %>" value="1"/> Herbst</p>
     </p>
   <% end %>
   <p><input type="submit" /></p>

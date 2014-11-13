@@ -14,6 +14,10 @@ class Category
     @@all
   end
 
+  def self.clear
+    @@all = []
+  end
+
   def self.for(real_cat)
     gender = real_cat[0].downcase
     name = CATEGORIES[gender.to_sym][real_cat]

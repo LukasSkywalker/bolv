@@ -8,6 +8,10 @@ class Result
     @@all << self
   end
 
+  def self.clear
+    @@all = []
+  end
+
   def self.by_athlete(athlete)
     @@all ||= []
     @@all.select do |result|

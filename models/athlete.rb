@@ -14,6 +14,10 @@ class Athlete
     @@all
   end
 
+  def self.clear
+    @@all = []
+  end
+
   def self.first_or_create(category, name, location, club)
     @@all ||= []
     a = @@all.select do |athlete|

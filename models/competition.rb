@@ -12,6 +12,10 @@ class Competition
     @@all
   end
 
+  def self.clear
+    @@all = []
+  end
+
   def max_points
     if semester == 0
       return 25

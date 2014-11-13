@@ -20,10 +20,11 @@ class App < Sinatra::Base
     (1..5).each do |i|
       name = 'file' + i.to_s
       nom = 'nom' + i.to_s
+      sem = 'sem' + i.to_s
 
       file = params[name.to_sym]
       if file
-        files << InputFile.new(file[:filename], params[nom.to_sym], file[:tempfile].path) 
+        files << InputFile.new(file[:filename], params[nom.to_sym] == 'on', params[sem.to_sym].to_i, file[:tempfile].path) 
       end
     end
     c = Calculator.new
@@ -32,10 +33,11 @@ class App < Sinatra::Base
 end
 
 class InputFile
-  attr_accessor :name, :nom, :path
-  def initialize(name, nom, path)
+  attr_accessor :name, :nom, :path, :sem
+  def initialize(name, nom, sem, path)
     @name = name
     @nom = nom
+    @sem = sem
     @path = path
   end
 end
