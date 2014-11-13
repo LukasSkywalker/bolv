@@ -1,3 +1,5 @@
+require_relative 'categories'
+
 class Category
   attr_accessor :name, :gender  
 
