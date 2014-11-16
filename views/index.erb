@@ -1,11 +1,17 @@
 <form action="/upload" method="post" enctype="multipart/form-data">
   <% for i in 1..5 do %>
-    <p>
-      <input type="file" name="file<%= i %>"/>
-      <p><input type="checkbox" name="nom<%= i %>"/> NOM</p>
-      <p><input type="radio" name="sem<%= i %>" value="0"/> Frühling</p>
-      <p><input type="radio" name="sem<%= i %>" value="1"/> Herbst</p>
-    </p>
+    <div class="uploadfield">
+      <div class="col">
+        <input type="file" name="file<%= i %>"/>
+      </div>
+      <div class="col-s">
+        <div><input type="checkbox" name="nom<%= i %>"/><label for="nom<%= i %>">NOM</label></div>
+      </div>
+      <div class="col-s">
+        <div><input type="radio" name="sem<%= i %>" value="0"/><label for="sem<%= i %>">Frühling</label></div>
+        <div><input type="radio" name="sem<%= i %>" value="1"/><label for="sem<%= i %>">Herbst</label></div>
+      </div>
+    </div>
   <% end %>
   <p><input type="submit" /></p>
 </form>

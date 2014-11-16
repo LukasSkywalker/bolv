@@ -28,7 +28,8 @@ class App < Sinatra::Base
       end
     end
     c = Calculator.new
-    c.calculate(files)
+    @result = c.calculate(files)
+    erb :result
   end
 end
 

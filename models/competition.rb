@@ -1,7 +1,7 @@
 class Competition
   attr_accessor :name, :semester
   def initialize(name, semester)
-    @name = name
+    @name = name.gsub('_', ' ')[2..-1]
     @semester = semester
     @@all ||= []
     @@all << self

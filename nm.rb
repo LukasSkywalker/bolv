@@ -15,7 +15,7 @@ class Calculator
       Category.new(cat, 'h')
     end
     files.each do |file|
-      comp_name = file.name.split('.').first[2..-1]
+      comp_name = file.name.split('.').first
       puts 'Lese ' + comp_name
       comp_semester = file.sem
       comp_nom = file.nom
@@ -34,10 +34,10 @@ class Calculator
         result = Result.new(c, ath, rank)
       end
     end
-    csv = '<table>'
+    csv = ''
     Category.all.each do |cat|
-      csv << "<tr><td>Kategorie: #{cat.name}</td></tr>"
-      csv << "<tr><td>" + ["Rang", "Name", "Wohnort", "Verein", "Punkte"].join("</td><td>") + '</td><td>' + Competition.all.map { |comp| comp.name }.join("</td><td>") + '</td></tr>'
+      csv << "<h2>Kategorie: #{cat.name}</h2>"
+      csv << "<table><tr><td>" + ["Rang", "Name", "Wohnort", "Verein", "Punkte"].join("</td><td>") + '</td><td width="100px">' + Competition.all.map { |comp| comp.name }.join("</td><td width='100px'>") + '</td></tr>'
       rang = 0
       last_points = 9999
       offset = 1
@@ -50,12 +50,13 @@ class Calculator
         end
         last_points = ath.points
         res = Competition.all.map do |comp|
-          comp.points_for(ath)
+          a = comp.points_for(ath)
+          a == 0 ? '' : a
         end
-        csv << "<tr><td>#{rang}</td><td>#{ath.name}</td><td>#{ath.location}</td><td>#{ath.club}</td><td>#{ath.points}</td><td>" + res.join("</td><td>") + '</td></tr>'
+        csv << "<tr><td>#{rang}</td><td>#{ath.name}</td><td>#{ath.location}</td><td>#{ath.club}</td><td class='bold'>#{ath.points}</td><td>" + res.join("</td><td>") + '</td></tr>'
       end
+      csv << '</table>'
     end
-    csv << '</table>'
   return csv
   end
 end

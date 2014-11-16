@@ -1,22 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8"> 
     <title>BOLV Nachtmeisterschaft</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic' rel='stylesheet' type='text/css' />
     <style>
-      input:not([type=submit]) {
-        float: left;
-      }
-      p {
-        clear: both;
-      }
-      table {
+      table, tr, td {
         border-collapse: collapse;
         border: 1px solid #CCC;
+        padding: 2px;
       } 
-
+      body * {
+        font-family: "Roboto";
+      }
+      body {
+        padding: 48px;
+      }
+      div.uploadfield {
+        clear: both;
+        padding: 24px;
+      }
+      div.col {
+        float: left;
+        width: 25%;
+      }
+      div.col-s {
+        float: left;
+        width: 10%;
+      }
+      .bold {
+        font-weight: 700;
+      }
     </style>
   </head>
   <body>
+    <h1>Berner Nachtmeisterschaft</h1>
     <%= yield %>
   </body>
 </html>
