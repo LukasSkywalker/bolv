@@ -21,7 +21,7 @@ class Athlete
   def self.first_or_create(category, name, location, club)
     @@all ||= []
     a = @@all.select do |athlete|
-      athlete.category == category && athlete.name == name
+      athlete.category == category && athlete.name == name.encode("UTF-8")
     end.first
     if a.nil?
       a = Athlete.new(category, name, location, club)
