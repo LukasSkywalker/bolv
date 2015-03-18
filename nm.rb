@@ -31,7 +31,8 @@ class Calculator
         next if ath.nil?
         rank = col['Rang'].to_i
         rank = 100 if rank == 0
-        result = Result.new(c, ath, rank)
+        time = col['Zeit']
+        result = Result.new(c, cat, ath, rank, time)
       end
     end
     csv = ''
