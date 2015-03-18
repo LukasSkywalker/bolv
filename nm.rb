@@ -52,7 +52,11 @@ class Calculator
         last_points = ath.points
         res = Competition.all.map do |comp|
           a = comp.points_for(ath)
-          a == 0 ? '' : a
+          if a.nil?
+            ''
+          else
+            a == 0 ? '-' : a
+          end
         end
         csv << "<tr><td>#{rang}</td><td>#{ath.name}</td><td>#{ath.location}</td><td>#{ath.club}</td><td class='bold'>#{ath.points}</td><td>" + res.join("</td><td>") + '</td></tr>'
       end

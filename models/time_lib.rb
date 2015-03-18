@@ -1,9 +1,13 @@
 class TimeLib
+  def self.invalid
+    10_000
+  end
+  
   def self.parse_time(t)
     parts = t.split(':')
     sep = parts.count - 1
     if sep == 0
-      99999
+      TimeLib.invalid
     elsif sep == 1
       m = parts[0]
       s = parts[1]

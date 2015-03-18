@@ -28,7 +28,8 @@ class Competition
   
   def points_for(athlete)
     res = Result.by_athlete(athlete).select{ |result| result.competition == self }.first
-    return 0 if res.nil?
+    return nil if res.nil?
+    return 0 if (TimeLib.parse_time(res.time) == TimeLib.invalid)
     res.points
   end
 end

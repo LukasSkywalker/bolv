@@ -37,7 +37,7 @@ class Athlete
   end
 
   def points
-    Competition.all.sort { |a,b| b.points_for(self) <=> a.points_for(self) }[0...3].inject(0) { |a, e| a + e.points_for(self) }
+    Competition.all.sort { |a,b| b.points_for(self).to_s.to_i <=> a.points_for(self).to_s.to_i }[0...3].inject(0) { |a, e| a + e.points_for(self).to_s.to_i }
   end
 
   def ranks
