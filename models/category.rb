@@ -4,7 +4,7 @@ class Category
   attr_accessor :name, :gender  
 
   def initialize(name, gender)
-    @name = name
+    @name = name.encode("UTF-8")
     @gender = gender
     @@all ||= []
     @@all << self

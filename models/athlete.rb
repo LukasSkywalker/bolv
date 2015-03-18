@@ -3,9 +3,9 @@ class Athlete
 
   def initialize(category, name, location, club)
     @category = category
-    @name = name
-    @location = location
-    @club = club
+    @name = name.encode("UTF-8")
+    @location = location.encode("UTF-8")
+    @club = (club || '').encode("UTF-8")
     @@all ||= []
     @@all << self
   end
