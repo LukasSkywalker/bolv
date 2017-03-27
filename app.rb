@@ -10,6 +10,9 @@ class App < Sinatra::Base
   helpers Sinatra::ContentFor
   set :erb, layout: :layout
   set :server, 'thin'
+  configure do
+    enable :logging
+  end
 
   get '/' do
     erb :index
